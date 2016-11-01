@@ -1,17 +1,26 @@
 <?php
+//FUNCTION TO GENERATE SELECT (FORM html) - Manual data = array (not recordset)
+/*
+v.3.0 show ini supported
+v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
+v.3.2 fix bug
+*/
 
-//funcion para generarl un SELECT con datos manuales desde un form
-
-//FUNCTION TO GENERATE SELECT (FORM html)
-function genSelectManual($nom=NULL, $datos, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni='- Seleccione -'){
-	//Version 3.0 (Multiple con soporte choses, selected multiple)
-	//$nom. nombre sel selector
-	//$RS_datos. Origen de Datos
-	//$sel. Valor Seleccionado
-	//$class. Clase aplicada para Objeto
-	//$opt. Atributos opcionales
-	if($datos){	
-	
+function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni='Select'){
+	//Version 3.2 
+	/* PARAMS
+	$nom. attrib 'name' for <select>
+	$data. Data Recordset
+	$sel. Value Selected
+	$class. attrib 'class' for <select>
+	$opt. optional attrib
+	$id. attrib 'id' for <select>
+	$placeholder. attrib 'placeholder' for <select>
+	$showIni. view default value
+	$valIni. value of default value
+	$nomIni. name of default value
+	*/
+	if($data){	
 	if(!isset($id))$id=$nom;
 	if (!$nom) $nom="select";
 	echo '<select name="'.$nom.'" id="'.$id.'" class="'.$class.'" data-placeholder="'.$placeHolder.'" '.$opt.'>';
@@ -21,19 +30,15 @@ function genSelectManual($nom=NULL, $datos, $sel=NULL, $class=NULL, $opt=NULL, $
 		if (!$sel) {echo "selected=\"selected\"";}
 		echo '>'.$valIni.'</option>';	
 	}
-	foreach($datos as $xid => $xval){
+	foreach($data as $xid => $xval){
 		echo '<option value="'.$xval.'"'; 
 		if(is_array($sel)){ if(in_array($xval,$sel)) echo 'selected="selected"'; }
 		else{ if (!(strcmp($xval, $sel))) echo 'selected="selected"'; }
 		echo '>'.$xid.'</option>';
 	}
-	
-	
-	
-	
 	echo '</select>';
 	}else{
-		echo '<span class="label label-danger">Error genSelect : '.$nom.'</span>';
+		echo '<span class="label label-danger">Error genSelectManual : '.$nom.'</span>';
 	}
 }
 

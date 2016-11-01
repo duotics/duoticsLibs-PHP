@@ -1,17 +1,29 @@
 <?php
-//FUNCTION TO GENERATE SELECT (FORM html) *NEW v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
-function genSelect($nom=NULL, $RS_datos, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){
-	//Version 3.0 (Multiple con soporte choses, selected multiple)
-	//$nom. nombre sel selector
-	//$RS_datos. Origen de Datos
-	//$sel. Valor Seleccionado
-	//$class. Clase aplicada para Objeto
-	//$opt. Atributos opcionales
-	if($RS_datos){
-	$row_RS_datos = mysql_fetch_assoc($RS_datos);
-	$totalRows_RS_datos = mysql_num_rows($RS_datos);
-	
-	
+//FUNCTION TO GENERATE SELECT (FORM html)
+/*
+v.3.0 show ini supported
+v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
+v.3.2 (Multiple con soporte choses, selected multiple)
+v.3.3 fix bug
+*/
+function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){
+	//Version 3.3 
+	/* PARAMS
+	$nom. attrib 'name' for <select>
+	$RS. Data Recordset
+	$sel. Value Selected
+	$class. attrib 'class' for <select>
+	$opt. optional attrib
+	$id. attrib 'id' for <select>
+	$placeholder. attrib 'placeholder' for <select>
+	$showIni. view default value
+	$valIni. value of default value
+	$nomIni. name of default value
+	*/
+	if($RS){
+	$dRS = mysql_fetch_assoc($RS);
+	$tRS = mysql_num_rows($RS);
+		
 	if(!isset($id))$id=$nom;
 	if (!$nom) $nom="select";
 	echo '<select name="'.$nom.'" id="'.$id.'" class="'.$class.'" data-placeholder="'.$placeHolder.'" '.$opt.'>';
@@ -22,33 +34,33 @@ function genSelect($nom=NULL, $RS_datos, $sel=NULL, $class=NULL, $opt=NULL, $id=
 		echo '>'.$nomIni.'</option>';	
 	}
 	
-	if($totalRows_RS_datos>0){
+	if($tRS>0){
 	do {
-		$grpAct=$row_RS_datos['sGRUP'];
+		$grpAct=$dRS['sGRUP'];
 		if(($grpSel!=$grpAct)&&($grpAct)){		
 			if($banG==true) echo '</optgroup>'; 
-			echo '<optgroup label="'.$row_RS_datos['sGRUP'].'">';
+			echo '<optgroup label="'.$dRS['sGRUP'].'">';
 			$grpSel=$grpAct;
 			$banG=true;
 		}
-		echo '<option value="'.$row_RS_datos['sID'].'"'; 
-		if(is_array($sel)){ if(in_array($row_RS_datos['sID'],$sel)){ echo 'selected="selected"'; }
-		}else{ if (!(strcmp($row_RS_datos['sID'], $sel))) {echo 'selected="selected"';} }
+		echo '<option value="'.$dRS['sID'].'"'; 
+		if(is_array($sel)){ if(in_array($dRS['sID'],$sel)){ echo 'selected="selected"'; }
+		}else{ if (!(strcmp($dRS['sID'], $sel))) {echo 'selected="selected"';} }
 		?>
-		<?php echo '>'.$row_RS_datos['sVAL'].'</option>';
-	} while ($row_RS_datos = mysql_fetch_assoc($RS_datos));
+		<?php echo '>'.$dRS['sVAL'].'</option>';
+	} while ($dRS = mysql_fetch_assoc($RS));
 	if($banG==true) echo '</optgroup>';
-	$rows = mysql_num_rows($RS_datos);
+	$rows = mysql_num_rows($RS);
 	if($rows > 0) {
-		mysql_data_seek($RS_datos, 0);
-		$row_RSe = mysql_fetch_assoc($RS_datos);
+		mysql_data_seek($RS, 0);
+		$dRSe = mysql_fetch_assoc($RS);
 	}
 	}
 	echo '</select>';
 	
-	mysql_free_result($RS_datos);
+	mysql_free_result($RS);
 	}else{
-		echo '<span class="label label-danger">Error generarSelect : '.$nom.'</span>';
+		echo '<span class="label label-danger">Error genSelect : '.$nom.'</span>';
 	}
 }
 
