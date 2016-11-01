@@ -1,5 +1,5 @@
 <?php
-//FUNCTION TO GENERATE SELECT (FORM html)
+//FUNCTION -genSelect- TO GENERATE SELECT (FORM html)
 /*
 v.3.0 show ini supported
 v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)

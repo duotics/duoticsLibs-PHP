@@ -1,11 +1,10 @@
 <?php
-//FUNCTION TO GENERATE SELECT (FORM html) - Manual data = array (not recordset)
+//FUNCTION -genSelectManual-  TO GENERATE SELECT (FORM html) - Manual data = array (not recordset)
 /*
 v.3.0 show ini supported
 v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
 v.3.2 fix bug
 */
-
 function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni='Select'){
 	//Version 3.2 
 	/* PARAMS
@@ -41,5 +40,6 @@ function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $i
 		echo '<span class="label label-danger">Error genSelectManual : '.$nom.'</span>';
 	}
 }
-
 ?>
+
+<?php  generarselect('txtProv', detRowGSel('tbl_prov','prov_id','prov_nom','1','1'), $detA['prov_id'], $class='form-control', 'required', 'txtProv', 'Seleccionar Provincia', TRUE) ?>
