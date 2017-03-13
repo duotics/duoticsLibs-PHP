@@ -5,12 +5,13 @@ v.3.0 show ini supported
 v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
 v.3.2 (Multiple con soporte choses, selected multiple)
 v.3.3 fix bug
+v.3.3.1 Added Extra Documentation
 */
 function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){
-	//Version 3.3 
+	//Version 3.3.1
 	/* PARAMS
 	$nom. attrib 'name' for <select>
-	$RS. Data Recordset
+	$RS. Data Recordset; need two parameters: sID, sVAL
 	$sel. Value Selected
 	$class. attrib 'class' for <select>
 	$opt. optional attrib
@@ -66,4 +67,4 @@ function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, 
 
 ?>
 
-<?php  generarselect('txtProv', detRowGSel('tbl_prov','prov_id','prov_nom','1','1'), $detA['prov_id'], $class='form-control', 'required', 'txtProv', 'Seleccionar Provincia', TRUE) ?>
+<?php  genSelect('txtProv', detRowGSel('tbl_prov','prov_id','prov_nom','1','1'), $detA['prov_id'], $class='form-control', 'required', 'txtProv', 'Seleccionar Provincia', TRUE,NULL,'Seleccione') ?>

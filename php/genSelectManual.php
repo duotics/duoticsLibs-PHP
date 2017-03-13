@@ -40,6 +40,7 @@ function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $i
 		echo '<span class="label label-danger">Error genSelectManual : '.$nom.'</span>';
 	}
 }
-?>
+// how to use
 
-<?php  generarselect('txtProv', detRowGSel('tbl_prov','prov_id','prov_nom','1','1'), $detA['prov_id'], $class='form-control', 'required', 'txtProv', 'Seleccionar Provincia', TRUE) ?>
+$data=array("PRE"=>"P", "DEF"=>"D");
+genSelectManual('diagTIP', $data, $dRSd['tip'], 'form-control', NULL, NULL, NULL, TRUE, NULL, 'Seleccione'); ?>
