@@ -1,7 +1,7 @@
 <?php 
 //FILE UPLOAD
+// v.1.2 2017-03-15
 function uploadfile($file, $params){
-	//Version 1.2
 	$code = md5($sdatet);
 	$prefijo = $params['pre'].'_'.$code;
 	$fileextnam = $file['name']; // Obtiene el nombre del archivo, y su extension
