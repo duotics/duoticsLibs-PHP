@@ -1,8 +1,9 @@
 <?php 
 //FILE UPLOAD
 // v.1.2 2017-03-15
-function uploadfile($file, $params){
-	$code = md5($sdatet);
+// v.1.3 2017-05-08 -> Update variable sdatet to Global
+function uploadfile($file, $params){// v.1.3
+	$code = md5($GLOBALS['sdatet']);
 	$prefijo = $params['pre'].'_'.$code;
 	$fileextnam = $file['name']; // Obtiene el nombre del archivo, y su extension
 	$ext = substr($fileextnam, strpos($fileextnam,'.'), strlen($fileextnam)-1); // Saca su extension
@@ -31,7 +32,7 @@ function uploadfile($file, $params){
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 /*HOW TO USE*/
-
+$valImg=$imgAnt;
 if(($_FILES['userfile']['name'])){
 	$paramsF=array("ext"=>array('.jpg','.gif','.png','.jpeg'),"size"=>2097152,"pat"=>RAIZ0.'images/types/',"pre"=>"cat");
 	$dFU=uploadfile($_FILES['userfile'], $paramsF);
