@@ -2,7 +2,7 @@
 //V.1.0 = 2016-08-18
 //V.1.1 = 2017-05-20 :: Corregido cadenas de texto con problemas al pasar como parametro un string
 //TOT ROWS table
-function totRowsTabP($table,$param=NULL){
+function totRowsTabP($table,$param=NULL){//v.1.1
 	$qry = sprintf('SELECT COUNT(*) AS TR FROM %s WHERE 1=1 %s',
 	SSQL($table,''),
 	SSQL($param,''));
