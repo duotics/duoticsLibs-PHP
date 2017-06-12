@@ -12,11 +12,9 @@ function totRowsTab($table,$field=NULL,$param=NULL,$cond='='){//v.1.1
 	}
 	$qry = sprintf('SELECT COUNT(*) AS TR FROM %s '.$qryCond,
 	SSQL($table,''));
-	echo $qry.'<hr>';
 	$RS = mysql_query($qry) or die(mysql_error());
 	$dRS = mysql_fetch_assoc($RS);
-	return ($dRS['TR
-	/*SHow me a integer value (count) of parameters*/']);
+	return ($dRS['TR']);/*SHow me a integer value (count) of parameters*/
 }
 //////////////
 /*HOW TO USE*/

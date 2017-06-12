@@ -11,21 +11,21 @@ function vImg($ruta,$nombre,$thumb=TRUE,$pthumb='t_',$retHtml=FALSE){//v1.5
 	//$nombre. Nombre del Archivo
 	//$thumb. TRUE o FALSE en caso de querer recuperar thumb
 	//$pthumb PREFIJO de Thumb
-	//RAIZ0 must be named RAIZ depends the root folder
+	//RAIZ must be named RAIZ0 depends the root folder
 	$imgRet['n']=$GLOBALS['RAIZi'].'struct/no_image.jpg';
 	$imgRet['t']=$imgRet['n'];
 	$imgRet['s']=FALSE;//Verify if file exist is default FALSE
 	if($nombre){
-		//echo '<hr>RAIZ0. '.RAIZ0.$ruta.$nombre;
-		//echo '<hr>$RAIZ0. '.$RAIZ.$ruta.$nombre;
-		if (file_exists(RAIZ0.$ruta.$nombre)){
+		//echo '<hr>RAIZ. '.RAIZ.$ruta.$nombre;
+		//echo '<hr>$RAIZ. '.$RAIZ.$ruta.$nombre;
+		if (file_exists(RAIZ.$ruta.$nombre)){
 			$imgRet['s']=TRUE;//FILE EXIST RETURN TRUE AND ALL DATA (link normal, link thumb, file name original)
 			$imgRet['f']=$nombre;
-			$imgRet['n']=$GLOBALS['RAIZ0'].$ruta.$nombre;
+			$imgRet['n']=$GLOBALS['RAIZ'].$ruta.$nombre;
 			$imgRet['t']=$imgRet['n'];
 			if ($thumb==TRUE){
-				if (file_exists(RAIZ0.$ruta.$pthumb.$nombre)){
-					$imgRet['t']=$GLOBALS['RAIZ0'].$ruta.$pthumb.$nombre;
+				if (file_exists(RAIZ.$ruta.$pthumb.$nombre)){
+					$imgRet['t']=$GLOBALS['RAIZ'].$ruta.$pthumb.$nombre;
 				}
 			}
 		}

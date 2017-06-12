@@ -1,8 +1,7 @@
 <?php 
 //Detalle completo Auditoria
 //v.1.0
-function dataAud($param1,$ord){
-	if (!$ord) $ord='DESC';
+function dataAud($param1,$ord='DESC'){
 	$query_RS_datos = sprintf('SELECT * FROM db_auditoria_detalle 
 	LEFT JOIN tbl_usuario ON db_auditoria_detalle.usr_id=db_auditoria_detalle.usr_id 
 	INNER JOIN db_empleados ON tbl_usuario.emp_cod=db_empleados.emp_cod 

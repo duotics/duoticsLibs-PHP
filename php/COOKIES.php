@@ -4,49 +4,45 @@ v.0.1 :: begin create function
 v.0.2 :: add PARAM $cookieIDtoVAL
 v.0.3 :: add CONDITION if $cookieName :: verify if the param $cookieName exists
 */
-function setCookieArray($cookieName,$cookieID,$cookieVal,$cookieIDtoVAL=TRUE,$limitItems=100,$cookieTime){//v.0.3
-	/*PARAMS
-	$cookieName -> Name of the cookie to use
-	$cookieVal -> ID (array) to set in a cookie
-	$cookieVal -> Value to set in ID(array) in a cookie
-	$cookieIDtoVAL -> define if it's TRUE the $cookieVal=$cookieID
-	$limitItems -> Limit of items array to store in a cookie
-	$cookieTime -> Time for the cookie expires :: 86400*30==2592000 -> 30 days is the DEFAULT VALUE
-	*/
-	if($cookieName){
-		//verify is the cookie array exists
-		if(array_key_exists($cookieName, $_COOKIE)) $cookie = unserialize($_COOKIE[$cookieName]); //Get the value of cookie in an array $cookie
-		else $cookie = array();//Clean array
-
-		if($cookieIDtoVAL==TRUE) $cookieVal=$cookieID;//BAN to set data  $cookieVal=$cookieID if is TRUE
-		if($cookie[$cookieID] != $cookieVal){//if the value doesn't exist it will be stored in the cookie
-			$Newcookie[$cookieID] = $cookieVal;//Set the new value in array $Newcookie
-			$cookie=$Newcookie+$cookie;//Put the new value up to top of array, Combine arrays: $Newcookie+$cookie
-			$salida = array_slice($cookie, 0, $limitItems,true);//Obtain only the Limit of items selected $limitItems
-			$cookie = serialize($salida);//serialize cookie to store array
-			if(!$cookieTime) $cookieTime=86400*30;
-			if(setcookie($cookieName, $cookie, time()+$cookieTime)){//SET COOKIE 30 DAYS  ->  time()+(86400 * 30)
-				$LOG.='Value set in Cookie<br>';
-			}else $LOG.='Error Value no set in Cookie<br>';
-		}else $LOG.='Values for cookie exists, not set<br>';
-	}else $LOG.='No Cookie Selected<br>';
-	return $LOG;//Return LOG of cookie
+//////////////////////////
+/* BEG COOKIES FUNCTION */
+function delCookie($cookieName){//v.0.3
+	unset($_COOKIE[$cookieName]);
+	setcookie($cookieName, "", time() - (86400 * 30),'/', ".mercoframes.com");
 }
-/* FUNCTION getCookieArray: Obtain value of a cookie
-v.0.1 :: begin create function
-*/
-function getCookieArray($cookieName){//v.0.1
-	//Verify if the cookie exists
-	if (isset($_COOKIE[$cookieName])) $cookieFIN=unserialize($_COOKIE[$cookieName]);//unserialize cookie to obtain array
+function setCookieArray($cookieName,$cookieID,$cookieVal,$cookieIDtoVAL=TRUE,$limitItems=100,$cookieTime=NULL){//v.0.3
+	$LOG.= $cookieName.' - ';
+	if(($cookieName)&&($cookieID)){
+		if(array_key_exists($cookieName, $_COOKIE)) {
+			$cookie = unserialize($_COOKIE[$cookieName]);
+		} else {
+			$cookie = array();
+		}
+		if($cookieIDtoVAL==TRUE) $cookieVal=$cookieID;
+		if($cookie[$cookieID] != $cookieVal){
+				$Newcookie[$cookieID] = $cookieVal;
+				$cookie=$Newcookie+$cookie;
+				$salida = array_slice($cookie, 0, $limitItems,true);   // devuelve "a", "b", y "c"
+				$cookie = serialize($salida);
+				if(!$cookieTime) $cookieTime=86400*30;
+				if(setcookie($cookieName, $cookie, time()+$cookieTime,'/', ".mercoframes.com")){
+					$LOG.='Value. '.$cookieID.' set in Cookie<br>';
+				}else $LOG.='Error Value no set in Cookie<br>';
+		}else $LOG.='Values for cookie exists, not set*<br>';
+	}else $LOG.='No data for Cookie<br>';
+	return $LOG;
+}
+
+function getCookieArray($cookieName,$limitItems=20){//v.0.3
+	if (isset($_COOKIE[$cookieName])){
+		$cookie=unserialize($_COOKIE[$cookieName]);
+		$cookieFIN = array_slice($cookie, 0, $limitItems,true);
+	}
 	return $cookieFIN;
 }
-/* FUNCTION delCookie: Delete a cookie
-v.0.1 :: begin create function
-*/
-function delCookie($cookieName){//v.0.1
-	unset($_COOKIE[$cookieName]);//UNSET COOKIE
-	setcookie($cookieName, "", time() - 3600);//DELETE COOKIE
-}
+/* END COOKIES FUNCTION */
+//////////////////////////
+
 ?>
 <?php /* HOW TO USE */ ?>
 <div style="background: #ddd">
@@ -102,3 +98,10 @@ function delCookie($cookieName){//v.0.1
 <?php
 var_dump($_COOKIE['recViews']);
 ?>
+<script type="text/javascript">
+	//SETEO LA COOKIE CON JS
+	$.post("cookie.php", { cookieName: "recViews", cookieID: "<?php echo $dRSi['i_id'] ?>", cookieNum:20 }, 
+	function(data){
+		console.log(data.LOG);
+	}, "json");
+</script>

@@ -5,8 +5,7 @@ v.3.0 show ini supported
 v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
 v.3.2 fix bug
 */
-function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni='Select'){
-	//Version 3.2 
+function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni='Select'){//v.3.2 
 	/* PARAMS
 	$nom. attrib 'name' for <select>
 	$data. Data Recordset
