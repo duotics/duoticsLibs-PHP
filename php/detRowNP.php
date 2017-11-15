@@ -21,6 +21,7 @@ PARAMS.
 	comp -> comparation (= / <>)
 	val -> value for parameter
 */
+$paramsN=NULL;//REINICIAR EL $paramsN siempre ya que si entra a un bucle se almacena y da error
 $paramsN[]=array(
 	array("cond"=>"AND","field"=>"fiel_db","comp"=>"=","val"=>$val1),
 	array("cond"=>"AND","field"=>"fiel_db","comp"=>'=',"val"=>$val1)

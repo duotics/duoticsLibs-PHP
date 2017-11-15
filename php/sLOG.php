@@ -2,8 +2,8 @@
 //sLOG() :: Funcions para la visualización de un LOG o mensaje de alerta (se visualiza solamente por 5 segundos)
 //v.2.0 de la función sLOG (2016-05-17 05:57)
 //v.2.1 corregido la visualizacion expontanea
-
-function sLOG($type=NULL, $msg_m=NULL, $msg_t=NULL, $msg_c=NULL, $msg_i=NULL){//v.2.1
+//v.2.2 agregado titulo a visualizacion alert
+function sLOG($type=NULL, $msg_m=NULL, $msg_t=NULL, $msg_c=NULL, $msg_i=NULL){//v.2.2
 	$vrfVL=TRUE; //var para setear $LOG
 	if($msg_m){
 		$LOG['m']=$msg_m;
@@ -19,6 +19,7 @@ function sLOG($type=NULL, $msg_m=NULL, $msg_t=NULL, $msg_c=NULL, $msg_i=NULL){//
 				$rLog='<div id="log">';
 				$rLog.='<div class="alert alert-dismissable '.$LOG['c'].'" style="margin:10px;">';
 				$rLog.='<button type="button" class="close" data-dismiss="alert">&times;</button>';
+				if($LOG['t']) $rLog.='<h3>'.$LOG['t'].'</h3>';
 				$rLog.=$LOG['m'];
 				$rLog.='</div></div>';
 			break;
