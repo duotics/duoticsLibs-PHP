@@ -2,16 +2,15 @@
 //FUNCTION -genMenu- TO GENERATE MENU FROM DATABASE (FORM html), SUPPORT LANGUAJES -> FROM PROYECTOSAMAN
 /*
 v.0.1 initial code
+v.0.2 remove INNER JOIN with table of translations, add default title from tbl_menu_items
 */
-function genMenu($refMC,$css=NULL,$vrfUL=TRUE){//v.0.1
+function genMenu($refMC,$css=NULL,$vrfUL=TRUE){//v.0.2
 	//Consulta para Menus Principales
 	$qry=sprintf("SELECT * FROM tbl_menus_items 
 	INNER JOIN tbl_menus on tbl_menus_items.men_idc=tbl_menus.id 
-	INNER JOIN tbl_menus_items_txt ON tbl_menus_items.men_id=tbl_menus_items_txt.idm 
 	WHERE tbl_menus.ref = %s 
 	AND tbl_menus_items.men_padre = %s  
 	AND tbl_menus_items.men_stat = %s 
-	AND tbl_menus_items_txt.lang= %s 
 	ORDER BY men_orden ASC",
 	SSQL($refMC,'text'),
 	SSQL('0','int'),
@@ -22,6 +21,18 @@ function genMenu($refMC,$css=NULL,$vrfUL=TRUE){//v.0.1
 	$tRSmp = mysql_num_rows($RSmp);
 	if($tRSmp > 0){
 		do{
+			$paramsN=NULL;//REINICIAR EL $paramsN siempre ya que si entra a un bucle se almacena y da error
+			$paramsN[]=array(
+				array("cond"=>"AND","field"=>"idm","comp"=>"=","val"=>$dRSmp['men_id']),
+				array("cond"=>"AND","field"=>"lang","comp"=>'=',"val"=>$_SESSION['lang'])
+			);
+			$detMenuTopLang=detRowNP('tbl_menus_items_txt',$paramsN);
+			if($detMenuTopLang){
+				$detMenuTopLang_tit=$detMenuTopLang[titv];
+			}else{
+				$detMenuTopLang_tit=$dRSmp[men_tit];
+			}
+			if(!$detMenuTopLang_tit) $detMenuTopLang_tit='N/D';
 			//Consulta para Submenus
 			$qry2 = sprintf("SELECT * FROM tbl_menus_items 
 			INNER JOIN tbl_menus_items_txt ON tbl_menus_items.men_id=tbl_menus_items_txt.idm 
@@ -46,7 +57,7 @@ function genMenu($refMC,$css=NULL,$vrfUL=TRUE){//v.0.1
 			}
 			$ret.='>';
 			if($dRSmp['men_icon']) $ret.='<i class="'.$dRSmp['men_icon'].'"></i> ';
-			$ret.=$dRSmp['titv'];
+			$ret.=$detMenuTopLang_tit;
 			if($tRSmi > 0){
 				$ret.=' <b class="caret"></b>';
 			}
@@ -70,7 +81,7 @@ function genMenu($refMC,$css=NULL,$vrfUL=TRUE){//v.0.1
 			
 			$ret.='<a href="'.$link.'">';
 			if($dRSmp['men_icon']) $ret.='<i class="'.$dRSmp['men_icon'].'"></i> ';
-			$ret.=$dRSmp['titv'].'</a>';
+			$ret.=$detMenuTopLang_tit.'</a>';
 		}                             	                    
 		$ret.='</li>';
 		if($dRSmp['men_postcode']) $ret.=$dRSmp['men_postcode'];
