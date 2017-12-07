@@ -3,11 +3,17 @@
 Select para un Listado Form HTML
 v.0.1
 v.0.2 -> 2017-05-05 :: Correcciones codigo
+v.0.3 -> 2017-11-22 :: Valida si el parametro tiene valor
 */
-function detRowGSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v0.2
+function detRowGSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v0.3
 	if($params){
 		foreach($params as $x => $dat) {
-			foreach($dat as $y => $xVal) $lP.=$xVal['cond'].' '.$xVal['field'].' '.$xVal['comp'].' "'.$xVal['val'].'" ';
+			foreach($dat as $y => $xVal){
+				$lP.=$xVal['cond'].' '.$xVal['field'].' '.$xVal['comp'];
+				if($xVal['val']){
+					$lP.=' "'.$xVal['val'].'" ';
+				}
+			}
 		}
 	}
 	if($ord){
