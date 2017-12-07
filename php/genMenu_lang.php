@@ -50,7 +50,7 @@ function genMenu($refMC,$css=NULL,$vrfUL=TRUE){//v.0.2
 			if($dRSmp['men_link']) $link = $GLOBALS['RAIZ'].$dRSmp['men_link'];
 			else $link = "#";
 			if($dRSmp['men_precode']) $ret.=$dRSmp['men_precode'];
-			$ret.='<li class="'.$cssSM.'">'; 
+			$ret.='<li class="'.$cssSM.' '.$dRSmp['men_css'].'" style="'.$dRSmp['men_sty'].'">';
 			if($tRSmi > 0){
 				$ret.='<a href="'.$link.'" class="dropdown-toggle"';
 				if($tRSmi > 0){ $ret.='data-toggle="dropdown"';
