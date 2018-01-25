@@ -3,7 +3,7 @@
 /*
 v.0.1 initial code
 */
-function genMenu($refMC,$css=NULL,$vrfUL=TRUE){
+function genMenu($refMC,$css=NULL,$vrfUL=TRUE){//v.0.1
 	//Consulta para Menus Principales
 	$qry=sprintf("SELECT * FROM tbl_menus_items 
 	INNER JOIN tbl_menu_usuario ON tbl_menus_items.men_id = tbl_menu_usuario.men_id 
