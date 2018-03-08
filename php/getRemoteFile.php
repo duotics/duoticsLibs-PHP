@@ -1,5 +1,6 @@
 <?php //ALTERNATIVE TO file_get_content
-function getRemoteFile($url, $timeout = 10) {
+//v.0.1 initial code
+function getRemoteFile($url, $timeout = 10) {//v.0.1
   $ch = curl_init();
   curl_setopt ($ch, CURLOPT_URL, $url);
   curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -8,5 +9,4 @@ function getRemoteFile($url, $timeout = 10) {
   curl_close($ch);
   return ($file_contents) ? $file_contents : FALSE;
 }
-
 ?>

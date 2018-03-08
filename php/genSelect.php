@@ -6,9 +6,9 @@ v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option in
 v.3.2 (Multiple con soporte choses, selected multiple)
 v.3.3 fix bug
 v.3.3.1 Added Extra Documentation
+v.4.0 mysqli implemented
 */
-function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){
-	//Version 3.3.1
+function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){//v.4.0
 	/* PARAMS
 	$nom. attrib 'name' for <select>
 	$RS. Data Recordset; need two parameters: sID, sVAL
@@ -22,8 +22,8 @@ function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, 
 	$nomIni. name of default value
 	*/
 	if($RS){
-	$dRS = mysql_fetch_assoc($RS);
-	$tRS = mysql_num_rows($RS);
+	$dRS = mysqli_fetch_assoc($RS);
+	$tRS = mysqli_num_rows($RS);
 		
 	if(!isset($id))$id=$nom;
 	if (!$nom) $nom="select";
@@ -49,17 +49,17 @@ function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, 
 		}else{ if (!(strcmp($dRS['sID'], $sel))) {echo 'selected="selected"';} }
 		?>
 		<?php echo '>'.$dRS['sVAL'].'</option>';
-	} while ($dRS = mysql_fetch_assoc($RS));
+	} while ($dRS = mysqli_fetch_assoc($RS));
 	if($banG==true) echo '</optgroup>';
-	$rows = mysql_num_rows($RS);
+	$rows = mysqli_num_rows($RS);
 	if($rows > 0) {
-		mysql_data_seek($RS, 0);
-		$dRSe = mysql_fetch_assoc($RS);
+		mysqli_data_seek($RS, 0);
+		$dRSe = mysqli_fetch_assoc($RS);
 	}
 	}
 	echo '</select>';
 	
-	mysql_free_result($RS);
+	mysqli_free_result($RS);
 	}else{
 		echo '<span class="label label-danger">Error genSelect : '.$nom.'</span>';
 	}

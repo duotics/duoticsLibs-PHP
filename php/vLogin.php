@@ -1,8 +1,10 @@
 <?php
 //FUNCTIONS ACCESS USERS
-/*v.0.1 initial code*/
-function vLogin($mSel=NULL){//v.0.1
+//v.0.1 initial code
+//v.0.2 mysqli updated -> 2018-03-02
+function vLogin($mSel=NULL){//v.0.2
 	//,$accesscheck=FALSE){
+	Global $conn;
 	if($mSel){
 		$qry=sprintf('SELECT * FROM tbl_menus_items 
 		INNER JOIN tbl_menu_usuario ON tbl_menus_items.men_id=tbl_menu_usuario.men_id
@@ -10,9 +12,9 @@ function vLogin($mSel=NULL){//v.0.1
 		WHERE tbl_menu_usuario.usr_id=%s AND tbl_menus_items.men_nombre=%s',
 		SSQL($_SESSION['MM_UserID'],'int'),
 		SSQL($mSel,'text'));
-		$RS=mysql_query($qry);
-		$dRS=mysql_fetch_assoc($RS);
-		$tRS=mysql_num_rows($RS);
+		$RS=mysqli_query($qry);
+		$dRS=mysqli_fetch_assoc($RS);
+		$tRS=mysqli_num_rows($RS);
 		if($tRS>0) $vVM=TRUE;
 		else $vVM=FALSE;
 	}else $vVM=TRUE;

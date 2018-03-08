@@ -3,14 +3,18 @@
 //v.2.0 de la función sLOG (2016-05-17 05:57)
 //v.2.1 corregido la visualizacion expontanea
 //v.2.2 agregado titulo a visualizacion alert
-function sLOG($type=NULL, $msg_m=NULL, $msg_t=NULL, $msg_c=NULL, $msg_i=NULL){//v.2.2
+//v.2.3 fixed issues
+function sLOG($type=NULL, $msg_m=NULL, $msg_t=NULL, $msg_c=NULL, $msg_i=NULL){//v.2.3
+	$LOG=NULL;
 	$vrfVL=TRUE; //var para setear $LOG
 	if($msg_m){
 		$LOG['m']=$msg_m;
 		$LOG['t']=$msg_t;
 		$LOG['c']=$msg_c;
 		$LOG['i']=$msg_i;
-	}else $LOG=$_SESSION['LOG'];
+	}else {
+		if(isset($_SESSION['LOG'])) $LOG=$_SESSION['LOG'];
+	}
 	
 	if($LOG){
 		if(!$LOG['c']) $LOG['c']='alert-info';

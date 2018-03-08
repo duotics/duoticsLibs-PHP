@@ -1,9 +1,12 @@
 <?php 
 //Function to prevent SQL injection
-if (!function_exists("SSQL")) {
+//v.1.0-> mysql extension
+//v.2.0-> mysqli extension update
+if (!function_exists("SSQL")) {//v.2.0 -> duotics_lib
 function SSQL($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") {
+  Global $conn;
   if (PHP_VERSION < 6) { $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue; }
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($conn, $theValue) : mysqli_real_escape_string($conn, $theValue);
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";

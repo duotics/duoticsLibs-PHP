@@ -1,14 +1,16 @@
 <?php
 //Datos de una TABLA / CAMPO / CONDICION
-//v1.0
-function detRow($table,$field,$param,$foN=NULL, $foF='ASC'){//v1.0
-if($foN) $paramOrd='ORDER BY '.$foN.' '.$foF;
-$qry = sprintf("SELECT * FROM %s WHERE %s = %s ".$paramOrd.' LIMIT 1',
-SSQL($table, ''),
-SSQL($field, ''),
-SSQL($param, "text"));
-$RS = mysql_query($qry) or die(mysql_error()); $dRS = mysql_fetch_assoc($RS); 
-mysql_free_result($RS); return ($dRS);
+//v.1.0
+//v.2.0 -> mysqli implemented
+function detRow($table,$field,$param,$foN=NULL, $foF='ASC'){//v2.0
+	Global $conn;
+	if($foN) $paramOrd='ORDER BY '.$foN.' '.$foF;
+	$qry = sprintf("SELECT * FROM %s WHERE %s = %s ".$paramOrd.' LIMIT 1',
+				   SSQL($table, ''),
+				   SSQL($field, ''),
+				   SSQL($param, "text"));
+	$RS = mysqli_query($conn,$qry) or die(mysqli_error($conn)); $dRS = mysqli_fetch_assoc($RS); 
+	mysqli_free_result($RS); return ($dRS);
 }
 /*HOW TO USE*/
 $det=detRow('tbl_database','field_table','param','fiel_order','ASC');
