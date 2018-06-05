@@ -1,7 +1,9 @@
 <?php
 //V.1.0 = 2016-08-18
 //V.1.1 = 2017-05-20 :: Corregido cadenas de texto con problemas al pasar como parametro un string
-function totRowsTab($table,$field=NULL,$param=NULL,$cond='='){//v.1.1
+//v.2.0 = 2018-04-02 :: update to mysqli
+function totRowsTab($table,$field=NULL,$param=NULL,$cond='='){//v.2.0
+	Global $conn;
 	// $table -> Table database
 	// $field -> Campo cond
 	if(($field)&&($param)){
@@ -12,8 +14,8 @@ function totRowsTab($table,$field=NULL,$param=NULL,$cond='='){//v.1.1
 	}
 	$qry = sprintf('SELECT COUNT(*) AS TR FROM %s '.$qryCond,
 	SSQL($table,''));
-	$RS = mysql_query($qry) or die(mysql_error());
-	$dRS = mysql_fetch_assoc($RS);
+	$RS = mysqli_query($conn,$qry) or die(mysqli_error($conn));
+	$dRS = mysqli_fetch_assoc($RS);
 	return ($dRS['TR']);/*SHow me a integer value (count) of parameters*/
 }
 //////////////

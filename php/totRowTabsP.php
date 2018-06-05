@@ -1,4 +1,7 @@
-<?php
+<?php /* Obtain total rows of a database table
+	// $table -> Table database
+	// $field -> Campo cond
+*/
 //V.1.0 = 2016-08-18
 //V.1.1 = 2017-05-20 :: Corregido cadenas de texto con problemas al pasar como parametro un string
 //v.2.0 -> 2018-03-02 -> mysqli updated

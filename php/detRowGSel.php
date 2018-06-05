@@ -4,7 +4,7 @@
 //v1.0
 //v.1.1 mysqli updated
 //v.1.2 Global $conn add
-function detRowGSel($table,$fieldID,$fieldVal,$field,$param,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v1.1
+function detRowGSel($table,$fieldID,$fieldVal,$field,$param,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v1.2
 	Global $conn;
 	if($ord){
 		if(!($valOrd)) $orderBy='ORDER BY '.' sVAL '.$ascdes;
