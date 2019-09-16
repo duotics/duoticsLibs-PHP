@@ -2,6 +2,7 @@
 //SELECT PARA UN GENERARSELECT
 // Select para un Listado Form HTML
 //v1.0
+//v1.0.1 change order of SELECT, first sVAL, later sID, because the use of certain expresions like DISTINCT cause error of syntaxis
 //v.1.1 mysqli updated
 //v.1.2 Global $conn add
 function detRowGSel($table,$fieldID,$fieldVal,$field,$param,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v1.2
@@ -23,7 +24,7 @@ function detRowGSel($table,$fieldID,$fieldVal,$field,$param,$ord=FALSE,$valOrd=N
 
 /*HOW TO USE*/
 //detRowGSel('table','field_id','field_nom','field_status','1','field_nom');
-detRowGSel('table','field_id','field_val','field_cond','cond',TRUE,'field_order','ASC');
+detRowGSel('table','field_val','field_id','field_cond','cond',TRUE,'field_order','ASC');
 
 //Used with genSelect
 echo genSelect('name_select', detRowGSel('table','field_id','field_nom','field_status','1','field_nom'), $valSel, 'form-control input-sm ');
