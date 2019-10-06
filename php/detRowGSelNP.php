@@ -4,8 +4,10 @@ Select para un Listado Form HTML
 v.0.1
 v.0.2 -> 2017-05-05 :: Correcciones codigo
 v.0.3 -> 2017-11-22 :: Valida si el parametro tiene valor
+v.1.0 -> 2019-10-05 :: mysqli_update
 */
-function detRowGSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v0.3
+function detRowGSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v1.0
+	global $conn;
 	if($params){
 		foreach($params as $x => $dat) {
 			foreach($dat as $y => $xVal){
@@ -25,8 +27,8 @@ function detRowGSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,
 	SSQL($fieldVal,''),
 	SSQL($table,''),
 	SSQL($orderBy,''));
-	$RS = mysql_query($qry) or die(mysql_error()); 
-	return ($RS); mysql_free_result($RS);
+	$RS = mysqli_query($conn,$qry) or die(mysqli_error($conn)); 
+	return ($RS); mysqli_free_result($RS);
 }
 ?>
 <?php
