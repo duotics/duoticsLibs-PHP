@@ -16,7 +16,9 @@ function dataAud($param1,$ord='DESC'){
 
 //Funcion Auditoria
 //v.1.0
-function AUD($id=NULL,$des=NULL,$eve=NULL){
+//v.2.0 -> mysqli updated
+function AUD($id=NULL,$des=NULL,$eve=NULL){//duotics_lib v.2.0
+	global $conn;
 	//Generación Descrición ($des), dependiendo del Evento ($eve)
 	switch ($eve) {
     	case 'sysacc':{
@@ -25,43 +27,35 @@ function AUD($id=NULL,$des=NULL,$eve=NULL){
 			break;
 		}
 		default:{
-			
 		}
 	}
-	
 	//Pregunto si existe id_aud ($id)
-	if($id){
-		//Pregunto Si db_auditoria Existente
+	if($id){ //Pregunto Si db_auditoria Existente
 		$detAud=detRow('db_auditoria','id_aud',$id);
 		if($detAud){
 			$id_aud=$detAud['id_aud'];
 			//INSERTO db_auditoria_Detalle
-			$qry=sprintf('INSERT INTO db_auditoria_detalle (id_aud, usr_id, audd_datet, audd_eve, audd_des) 
-			VALUES (%s,%s,%s,%s,%s)',
+			$qry=sprintf('INSERT INTO db_auditoria_detalle (id_aud, usr_id, audd_datet, audd_eve, audd_des) VALUES (%s,%s,%s,%s,%s)',
 			SSQL($id,'int'),
 			SSQL($_SESSION['MM_UserID'],'int'),
 			SSQL($GLOBALS['sdatet'],'text'),
 			SSQL($eve,'text'),
 			SSQL($des,'text'));
-			@mysql_query($qry);
+			@mysqli_query($conn,$qry);
 		}
-	}else{
-		//INSERT db_auditoria
-		$qryAud=sprintf('INSERT INTO db_auditoria (aud_datet) 
-		VALUES (%s)',
+	}else{ //INSERT db_auditoria
+		$qryAud=sprintf('INSERT INTO db_auditoria (aud_datet) VALUES (%s)',
 		SSQL($GLOBALS['sdatet'],'text'));
 		@mysql_query($qryAud);
-		$id_aud=mysql_insert_id();
-		
+		$id_aud=mysqli_insert_id();
 		//INSERT db_auditoria_detalle
-		$qryAudDet=sprintf('INSERT INTO db_auditoria_detalle (id_aud, usr_id, audd_datet, audd_eve, audd_des) 
-		VALUES (%s,%s,%s,%s,%s)',
+		$qryAudDet=sprintf('INSERT INTO db_auditoria_detalle (id_aud, usr_id, audd_datet, audd_eve, audd_des) VALUES (%s,%s,%s,%s,%s)',
 		SSQL($id_aud,'int'),
 		SSQL($_SESSION['MM_UserID'],'int'),
 		SSQL($GLOBALS['sdatet'],'text'),
 		SSQL($eve,'text'),
 		SSQL($des,'text'));
-		@mysql_query($qryAudDet);
+		@mysqli_query($conn,$qryAudDet);
 	}
 	return($id_aud);
 }
