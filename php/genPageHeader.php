@@ -5,8 +5,9 @@ v.0.2 function name changed to genPageHeader
 v.0.3 function name changed to genPageHead
 v.0.4 function name changed to genPageHeader
 v.0.5 add param $tip to type of header manage in switch case
+v.0.6 upgrade bootstrap version css to 4.4
 */
-function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL, $des=NULL,$icon=NULL,$pullL=NULL,$pullR=NULL){//duotics_lib->v.0.5
+function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL, $des=NULL,$icon=NULL,$floatL=NULL,$floatR=NULL){//duotics_lib->v.0.6
 	$banMod=FALSE;
 	if($MOD){
 		$dM=detMod($MOD);
@@ -22,28 +23,28 @@ function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL,
 	switch($tip){
 		case 'page-header':
 			$ret.='<div class="page-header">';
-			if ($pullL) $ret.='<div class="pull-left">'.$pullL.'</div>';
+			if ($floatL) $ret.='<div class="float-left">'.$floatL.'</div>';
 			$ret.='<'.$tag.'>';
 			if($dM['mod_icon']) $ret.=' <i class="'.$dM['mod_icon'].'"></i> ';
-			if($id) $ret.=' <span class="label label-primary">'.$dM['mod_cod'].'</span> ';
+			if($id) $ret.=' <span class="badge badge-primary">'.$dM['mod_cod'].'</span> ';
 			$ret.=$dM['mod_nom'];
 			$ret.=' <small>'.$dM['mod_des'].'</small>';
 			$ret.='</'.$tag.'>';
-			if ($pullR) $ret.='<div class="pull-right">'.$pullR.'</div>';
+			if ($floatR) $ret.='<div class="float-right">'.$floatR.'</div>';
 			$ret.='</div>';
 		break;
 		case 'navbar':
-			$ret.='<nav class="navbar navbar-default">';
+			$ret.='<nav class="navbar navbar-secondary">';
 			$ret.='<div class="container-fluid">';
 			$ret.='<div class="navbar-header">';
 			$ret.='<a class="navbar-brand" href="#">'.$dM['mod_nom'];
-			$ret.=' <small class="label label-default">'.$dM['mod_des'].'</small></a>';
+			$ret.=' <small class="badge badge-secondary">'.$dM['mod_des'].'</small></a>';
 			$ret.='</div>';
 			$ret.='</div></nav>';
 		break;
 		default:
 			$ret.='<div>';
-			if($id) $ret.=' <span class="label label-default">'.$dM['mod_cod'].'</span> ';
+			if($id) $ret.=' <span class="badge badge-secondary">'.$dM['mod_cod'].'</span> ';
 			$ret.=$dM['mod_nom'];
 			$ret.='<div>';
 		break;
