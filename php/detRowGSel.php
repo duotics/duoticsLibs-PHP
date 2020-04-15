@@ -27,5 +27,5 @@ function detRowGSel($table,$fieldID,$fieldVal,$field,$param,$ord=FALSE,$valOrd=N
 detRowGSel('table','field_val','field_id','field_cond','cond',TRUE,'field_order','ASC');
 
 //Used with genSelect
-echo genSelect('name_select', detRowGSel('table','field_id','field_nom','field_status','1','field_nom'), $valSel, 'form-control input-sm ');
+echo genSelect('name_select', detRowGSel('table','field_val','field_id','field_cond','cond',TRUE,'field_order','ASC'), $valSel, 'form-control input-sm ');
 ?>
