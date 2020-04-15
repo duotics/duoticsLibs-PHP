@@ -4,15 +4,16 @@ Select para un Listado Form HTML
 v.0.1
 v.0.2 -> 2017-05-05 :: Correcciones codigo
 v.0.3 -> 2017-11-22 :: Valida si el parametro tiene valor
+v.1.0 -> 20191009 : mysqli updated
 */
 function detRowSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v0.3
+	global $conn;
 	if($params){
 		foreach($params as $x => $dat) {
 			foreach($dat as $y => $xVal){
 				$lP.=$xVal['cond'].' '.$xVal['field'].' '.$xVal['comp'];
-				if($xVal['val']){
-					$lP.=' "'.$xVal['val'].'" ';
-				}
+				//if($xVal[val]) $lP.=' "'.$xVal['val'].'" ';
+				$lP.=' "'.$xVal['val'].'" ';
 			}
 		}
 	}
@@ -25,19 +26,18 @@ function detRowSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$
 	SSQL($fieldVal,''),
 	SSQL($table,''),
 	SSQL($orderBy,''));
-	$RS = mysql_query($qry) or die(mysql_error());
+	$RS = mysqli_query($conn,$qry) or die(mysqli_error($conn));
 	$dRS = mysqli_fetch_assoc($RS);
-	$tRS=mysql_num_rows($RS);
+	$tRS=mysqli_num_rows($RS);
 	
 	if($tRS>0){ $x=0;
-		do{ $list[$x]=$dRS['sID']; $x++;
-		} while ($dRS = mysqli_fetch_assoc($RS));
+		do{ 
+			$list[$x]=$dRS['sID'];
+			$x++;
+		}while ($dRS = mysqli_fetch_assoc($RS));
 	}
 	mysqli_free_result($RS);
 	return ($list);
-	
-	//return ($RS);
-	//mysql_free_result($RS);
 }
 ?>
 <?php
