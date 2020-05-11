@@ -1,9 +1,9 @@
 <?php 
-/*Breadcrumb Generate
-v.1 basic code
-v.2.0 - 20190403 - bootstrap 4.3.1
+/*
+Breadcrumb Generate
 */
 function genBreadcrumb($type,$id,$sel=NULL){//v.2.0
+	$ret_lil=null;
 	$ret_li='<li class="breadcrumb-item"><a href="'.$GLOBALS['RAIZ'].'">Inicio</a></li>';
 	//BREADCRUMB CATALOG
 	if(($type=='item')||($type=='cat')){
