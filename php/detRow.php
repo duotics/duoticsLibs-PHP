@@ -1,9 +1,8 @@
 <?php
 //Datos de una TABLA / CAMPO / CONDICION
-//v.1.0
-//v.2.0 -> mysqli implemented
 function detRow($table,$field,$param,$foN=NULL, $foF='ASC'){//v2.0
 	Global $conn;
+	$paramOrd=null;
 	if($foN) $paramOrd='ORDER BY '.$foN.' '.$foF;
 	$qry = sprintf("SELECT * FROM %s WHERE %s = %s ".$paramOrd.' LIMIT 1',
 				   SSQL($table, ''),
