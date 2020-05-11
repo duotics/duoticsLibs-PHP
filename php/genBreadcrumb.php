@@ -2,7 +2,7 @@
 /*
 Breadcrumb Generate
 */
-function genBreadcrumb($type,$id,$sel=NULL){//v.2.0
+function genBreadcrumb($type,$id,$sel=NULL){//v.2.1
 	$ret_lil=null;
 	$ret_li='<li class="breadcrumb-item"><a href="'.$GLOBALS['RAIZ'].'">Inicio</a></li>';
 	//BREADCRUMB CATALOG
@@ -35,7 +35,7 @@ function genBreadcrumb($type,$id,$sel=NULL){//v.2.0
 	//BREADCRUMB OTHER
 	if($sel)$ret_li.='<li class="breadcrumb-item active">'.$sel.'</li>';
 	//CONCAT BREADCRUMB
-	$ret.='<nav aria-label="breadcrumb">';
+	$ret='<nav aria-label="breadcrumb">';
 	$ret.='<ol class="breadcrumb">';
 	$ret.=$ret_li;
 	$ret.=$ret_lil;
