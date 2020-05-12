@@ -1,10 +1,11 @@
 <?php 
-/*
-Breadcrumb Generate
+/* Breadcrumb Generate
+v.2.1 - 20200511 - some changes minnor
 */
-function genBreadcrumb($type,$id,$sel=NULL){//v.2.1
-	$ret_lil=null;
-	$ret_li='<li class="breadcrumb-item"><a href="'.$GLOBALS['RAIZ'].'">Inicio</a></li>';
+function genBreadcrumb($type,$id,$sel=NULL){//v.2.2
+	$ret=null;//variable de retorno
+	$ret_lil=null;//almacena los hijos <li> de <ul>
+	$ret_li='<li class="breadcrumb-item"><a href="'.$GLOBALS['RAIZ'].'">Home</a></li>';//first <li>
 	//BREADCRUMB CATALOG
 	if(($type=='item')||($type=='cat')){
 		if($type=='item'){
@@ -27,11 +28,9 @@ function genBreadcrumb($type,$id,$sel=NULL){//v.2.1
 			$cloop++;
 		}while($loop==TRUE);
 	}
-	
 	if($type=='gall'){
 		$ret_li.='<li class="breadcrumb-item"><a href="'.$GLOBALS['RAIZ'].'g">Gallery</a></li>';
 	}
-	
 	//BREADCRUMB OTHER
 	if($sel)$ret_li.='<li class="breadcrumb-item active">'.$sel.'</li>';
 	//CONCAT BREADCRUMB
