@@ -4,7 +4,8 @@
 //v.2.1 corregido la visualizacion expontanea
 //v.2.2 agregado titulo a visualizacion alert
 //v.2.3 fixed issues
-function sLOG($type=NULL, $msg_m=NULL, $msg_t=NULL, $msg_c=NULL, $msg_i=NULL){//v.2.3
+//v.2.4 add case 't' -> for toast bootstrap
+function sLOG($type=NULL, $msg_m=NULL, $msg_t=NULL, $msg_c=NULL, $msg_i=NULL){//v.2.4
 	$LOG=NULL;
 	$vrfVL=TRUE; //var para setear $LOG
 	if($msg_m){
@@ -34,6 +35,22 @@ function sLOG($type=NULL, $msg_m=NULL, $msg_t=NULL, $msg_c=NULL, $msg_i=NULL){//
 			break;
 			case 's':
 				$vrfVL=FALSE;
+			break;
+			case 't':
+				//echo 'case t<br>';
+				$rLog='<div class="toast" style="position: absolute; bottom: 25px; right: 25px; z-index: 999" data-delay="3000">
+				<div class="toast-header">
+				  <img src="'.$LOG['i'].'" class="img-fluid img-xs rounded mr-2" alt="...">
+				  <strong class="mr-auto">'.$LOG['t'].'</strong>
+				  <!--<small>11 mins ago</small>-->
+				  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="toast-body">
+				  '.$LOG['m'].'
+				</div>
+			  </div>';
 			break;
 			default:
 				$rLog='<div>'.$LOG['m'].'</div>';
