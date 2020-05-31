@@ -5,8 +5,7 @@ v.3.0 show ini supported
 v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
 v.3.2 fix bug
 */
-function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni='Select'){//v.3.2 
-	/* PARAMS
+/* DOCUMENTATION
 	$nom. attrib 'name' for <select>
 	$data. Data Recordset
 	$sel. Value Selected
@@ -17,7 +16,8 @@ function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $i
 	$showIni. view default value
 	$valIni. value of default value
 	$nomIni. name of default value
-	*/
+*/
+function genSelectManual($nom=NULL, $data, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni='Select'){//v.3.2 
 	if($data){	
 	if(!isset($id))$id=$nom;
 	if (!$nom) $nom="select";

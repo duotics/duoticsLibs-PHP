@@ -1,15 +1,7 @@
 <?php
 //FUNCTION -genSelect- TO GENERATE SELECT (FORM html)
-/*
-v.3.0 show ini supported
-v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
-v.3.2 (Multiple con soporte choses, selected multiple)
-v.3.3 fix bug
-v.3.3.1 Added Extra Documentation
-v.4.0 mysqli implemented
-*/
-function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){//v.4.0
-	/* PARAMS
+/* Documentation
+	//PARAMS
 	$nom. attrib 'name' for <select>
 	$RS. Data Recordset; need two parameters: sID, sVAL
 	$sel. Value Selected
@@ -20,7 +12,16 @@ function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, 
 	$showIni. view default value
 	$valIni. value of default value
 	$nomIni. name of default value
-	*/
+*/
+/* version history
+	v.3.0 show ini supported
+	v.3.1 (Añadido params $valIni, $nomIni : para valores por defecto del option inicial)
+	v.3.2 (Multiple con soporte choses, selected multiple)
+	v.3.3 fix bug
+	v.3.3.1 Added Extra Documentation
+	v.4.0 mysqli implemented
+*/
+function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){//v.4.0
 	if($RS){
 	$dRS = mysqli_fetch_assoc($RS);
 	$tRS = mysqli_num_rows($RS);

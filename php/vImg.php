@@ -6,18 +6,20 @@
 //v1.3 2017-04-01 -> add $imgRet['f'] to return original filename
 //v1.4 2017-04-01 -> add $imgRet['s'] to return status of function
 //v1.5 2017-04-11 -> add $retHtml to return html code img/a
-function vImg($ruta,$nombre,$thumb=TRUE,$pthumb='t_',$retHtml=FALSE){//v1.5
-	//$ruta. Ruta o subcarpeta definida dentro de la RAIZi (carpeta de imagenes)
+
+/*DOCUMENTATION
+	$ruta. Ruta o subcarpeta definida dentro de la RAIZi (carpeta de imagenes)
 	//$nombre. Nombre del Archivo
 	//$thumb. TRUE o FALSE en caso de querer recuperar thumb
 	//$pthumb PREFIJO de Thumb
 	//RAIZ must be named RAIZ0 depends the root folder
+*/
+function vImg($ruta,$nombre,$thumb=TRUE,$pthumb='t_',$retHtml=FALSE){//v1.5
 	$imgRet['n']=$GLOBALS['RAIZi'].'struct/no_image.jpg';
 	$imgRet['t']=$imgRet['n'];
 	$imgRet['s']=FALSE;//Verify if file exist is default FALSE
 	if($nombre){
-		//echo '<hr>RAIZ. '.RAIZ.$ruta.$nombre;
-		//echo '<hr>$RAIZ. '.$RAIZ.$ruta.$nombre;
+
 		if (file_exists(RAIZ.$ruta.$nombre)){
 			$imgRet['s']=TRUE;//FILE EXIST RETURN TRUE AND ALL DATA (link normal, link thumb, file name original)
 			$imgRet['f']=$nombre;
