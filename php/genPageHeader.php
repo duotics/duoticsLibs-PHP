@@ -6,11 +6,15 @@ v.0.3 function name changed to genPageHead
 v.0.4 function name changed to genPageHeader
 v.0.5 add param $tip to type of header manage in switch case
 v.0.6 upgrade bootstrap version css to 4.4
+v.0.7 $ret=null; fix bug php 7
+v.0.8 upgrade call function from detMod() to detCom -> Obtain detaills from database table db_components
+v.0.9 20200617 : add default $tag value
 */
-function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL, $des=NULL,$icon=NULL,$floatL=NULL,$floatR=NULL){//duotics_lib->v.0.6
+function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL, $des=NULL,$icon=NULL,$floatL=NULL,$floatR=NULL){//duotics_lib->v.0.9
+	if(!isset($tag)||($tag=='')) $tag='h1';
 	$banMod=FALSE;
 	if($MOD){
-		$dM=detMod($MOD);
+		$dM=detCom($MOD);
 		if($dM) $banMod=TRUE;
 	}
 	if(!$banMod){
@@ -19,7 +23,7 @@ function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL,
 		$dM['mod_des']=$des;
 		$dM['mod_icon']=$icon;
 	}
-	$ret;
+	$ret=null;
 	switch($tip){
 		case 'page-header':
 			$ret.='<div class="page-header">';
