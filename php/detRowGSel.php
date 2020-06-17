@@ -1,12 +1,15 @@
 <?php 
-//SELECT PARA UN GENERARSELECT
-// Select para un Listado Form HTML
-//v1.0
-//v1.0.1 change order of SELECT, first sVAL, later sID, because the use of certain expresions like DISTINCT cause error of syntaxis
-//v.1.1 mysqli updated
-//v.1.2 Global $conn add
-function detRowGSel($table,$fieldID,$fieldVal,$field,$param,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v1.2
+/*SELECT PARA UN GENERARSELECT
+Select para un Listado Form HTML
+v1.0
+v1.0.1 change order of SELECT, first sVAL, later sID, because the use of certain expresions like DISTINCT cause error of syntaxis
+v.1.1 mysqli updated
+v.1.2 Global $conn add
+v.1.3 $orderBy=null;//Param for ordering SQL rows
+*/
+function detRowGSel($table,$fieldID,$fieldVal,$field,$param,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//duotics_lib->v1.3
 	Global $conn;
+	$orderBy=null;//Param for ordering SQL rows
 	if($ord){
 		if(!($valOrd)) $orderBy='ORDER BY '.' sVAL '.$ascdes;
 		else $orderBy='ORDER BY '.$valOrd.' '.$ascdes;

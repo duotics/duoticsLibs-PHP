@@ -5,9 +5,14 @@ v.0.1
 v.0.2 -> 2017-05-05 :: Correcciones codigo
 v.0.3 -> 2017-11-22 :: Valida si el parametro tiene valor
 v.1.0 -> 20191009 : mysqli updated
+v.1.1 -> 20200612 : add $lP=null - fix bug php 7 undefined
+v.1.2 -> 20200612 : add null vars $orderBy and $list - fix bug php 7 undefined
 */
-function detRowSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v0.3
+function detRowSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//duotics-lib -> v1.2
 	global $conn;
+	$lP=null;
+	$orderBy=null;
+	$list=null;
 	if($params){
 		foreach($params as $x => $dat) {
 			foreach($dat as $y => $xVal){

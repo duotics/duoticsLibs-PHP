@@ -1,8 +1,12 @@
 <?php //Datos de una TABLA con N Parametros
-//v.1.0
-//v.2.0 update to mysqli
-function detRowNP($table,$params){ //v2.0 -> duotics_lib
+/* Version history
+v.1.0
+v.2.0 update to mysqli
+v.2.1 fix bug null val php 7
+*/
+function detRowNP($table,$params){ //duotics_lib -> v2.1
 	Global $conn;
+	$lP=null;
 	if($params){
 		foreach($params as $x => $dat) {
 			foreach($dat as $y => $xVal) $lP.=$xVal['cond'].' '.$xVal['field'].' '.$xVal['comp'].' "'.$xVal['val'].'" ';

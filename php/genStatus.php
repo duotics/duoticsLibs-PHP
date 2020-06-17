@@ -7,21 +7,23 @@ v.3.2 -> change btn-xs -> to -> btn-sm
 v.4.0 -> agregado array de iconos como alternativa a iconos por defecto
 v.4.1 -> upgrade to boostrap 4.4 : change btn-xs -> to -> btn-sm
 			upgrade to fontawesome
+v.4.2 -> add $lP=null fix bug php 7
+v.4.3 -> upgrade bootstrap 4.5
 */
-
-function genStatus($dest,$params,$css=NULL,$icons=NULL){//duotics_lib->v.4.1
+function genStatus($dest,$params,$css=NULL,$icons=NULL){//duotics_lib->v.4.3
+	$lP=null;
 	$firstP=TRUE;
 	foreach($params as $x => $xVal) {
 		if($x=='val'){
 			if(!$icons){
 				if($xVal==1){
 					$xVal=0;
-					$cssST='btn btn-success btn-xs';
+					$cssST='btn btn-success btn-sm';
 					if($icons[1]) $txtST=$icons[1];
 					else $txtST='<i class="fas fa-check"></i>';
 				}else{
 					$xVal=1;
-					$cssST='btn btn-warning btn-xs';
+					$cssST='btn btn-warning btn-sm';
 					if($icons[1]) $txtST=$icons[1];
 					else $txtST='<i class="fas fa-times"></i>';
 				}

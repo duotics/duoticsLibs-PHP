@@ -1,6 +1,10 @@
 <?php
+/* Version History
+v.2.0 start documentation
+v.2.1 add $paramOrd=null;
+*/
 //Datos de una TABLA / CAMPO / CONDICION
-function detRow($table,$field,$param,$foN=NULL, $foF='ASC'){//v2.0
+function detRow($table,$field,$param,$foN=NULL, $foF='ASC'){//v2.1
 	Global $conn;
 	$paramOrd=null;
 	if($foN) $paramOrd='ORDER BY '.$foN.' '.$foF;
