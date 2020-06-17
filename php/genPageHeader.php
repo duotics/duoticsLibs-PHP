@@ -9,8 +9,9 @@ v.0.6 upgrade bootstrap version css to 4.4
 v.0.7 $ret=null; fix bug php 7
 v.0.8 upgrade call function from detMod() to detCom -> Obtain detaills from database table db_components
 v.0.9 20200617 : add default $tag value
+v.0.10 20200617 : change order float deploy
 */
-function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL, $des=NULL,$icon=NULL,$floatL=NULL,$floatR=NULL){//duotics_lib->v.0.9
+function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL, $des=NULL,$icon=NULL,$floatL=NULL,$floatR=NULL){//duotics_lib->v.0.10
 	if(!isset($tag)||($tag=='')) $tag='h1';
 	$banMod=FALSE;
 	if($MOD){
@@ -28,13 +29,13 @@ function genPageHeader($MOD, $tip='page-header', $tit=NULL, $tag='h1', $id=NULL,
 		case 'page-header':
 			$ret.='<div class="page-header">';
 			if ($floatL) $ret.='<div class="float-left">'.$floatL.'</div>';
+			if ($floatR) $ret.='<div class="float-right">'.$floatR.'</div>';
 			$ret.='<'.$tag.'>';
 			if($dM['mod_icon']) $ret.=' <i class="'.$dM['mod_icon'].'"></i> ';
 			if($id) $ret.=' <span class="badge badge-primary">'.$dM['mod_cod'].'</span> ';
 			$ret.=$dM['mod_nom'];
 			$ret.=' <small>'.$dM['mod_des'].'</small>';
 			$ret.='</'.$tag.'>';
-			if ($floatR) $ret.='<div class="float-right">'.$floatR.'</div>';
 			$ret.='</div>';
 		break;
 		case 'navbar':
