@@ -1,11 +1,14 @@
 <?php
-/*
+/*documentation
+	$data=array("PRE"=>"P", "DEF"=>"D");
+*/
+/*version history
 v.0.2 add $sel=null default, add condition if $sel
 v.0.3 more options switch case
 v.0.4 add $val=null; fix bug php 7
+v.0.5 20200618 : add spaces after and befre $xval
 */
-function genFormsInpRadio($params,$sel=null,$typ=null,$def=null,$name=null){//duotics_lib -> v.0.3
-	//$data=array("PRE"=>"P", "DEF"=>"D");
+function genFormsInpRadio($params,$sel=null,$typ=null,$def=null,$name=null){//duotics_lib -> v.0.5
 	$val=null;
 	$contI=0;
 	foreach($params as $xid => $xval){
@@ -17,7 +20,7 @@ function genFormsInpRadio($params,$sel=null,$typ=null,$def=null,$name=null){//du
 				$val.='"><input type="radio" name="'.$name.'" value="'.$xid.'"';
 				if (!(strcmp($sel, $xid))) $val.=' checked ';
 				else if (!(strcmp($def, $xid))) $val.=' checked ';
-				$val.='>'.$xval.'</label>';
+				$val.='> '.$xval.' </label>';
 			break;
 			case 'inline':
 				$val.='<div class="form-check form-check-inline">';
@@ -25,7 +28,7 @@ function genFormsInpRadio($params,$sel=null,$typ=null,$def=null,$name=null){//du
 				if (!(strcmp($sel, $xid))) $val.=' checked ';
 				else if (!(strcmp($def, $xid))) $val.=' checked ';
 				$val.='>';
-				$val.='<label class="form-check-label" for="inlineRadioOptions'.$xid.'">'.$xval.'</label>';
+				$val.='<label class="form-check-label" for="inlineRadioOptions'.$xid.'"> '.$xval.' </label>';
 				$val.='</div>';
 			break;
 			default:
@@ -33,13 +36,13 @@ function genFormsInpRadio($params,$sel=null,$typ=null,$def=null,$name=null){//du
 				<input type="radio" name="'.$name.'" value="'.$xid.'"';
 				if (!(strcmp($sel, $xid))) $val.=' checked ';
 				else if (!(strcmp($def, $xid))) $val.=' checked ';
-				$val.='>'.$xval.'</label>';
+				$val.='> '.$xval.' </label>';
 			break;
 		}
 		$contI++;
 	}
 	if($contI>0){
-		if($typ=='btn-group') $val='<div class="btn-group" data-toggle="buttons">'.$val.'</div>';
+		if($typ=='btn-group') $val='<div class="btn-group" data-toggle="buttons"> '.$val.' </div>';
 	}
 	return $val;
 }
