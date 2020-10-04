@@ -5,9 +5,11 @@ v.0.1
 v.0.2 -> 2017-05-05 :: Correcciones codigo
 v.0.3 -> 2017-11-22 :: Valida si el parametro tiene valor
 v.1.0 -> 2019-10-05 :: mysqli_update
+v.1.1 -> $lp defined null
 */
-function detRowGSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v1.0
+function detRowGSelNP($table,$fieldID,$fieldVal,$params,$ord=FALSE,$valOrd=NULL,$ascdes='ASC'){//v1.1
 	global $conn;
+	$lP=null;
 	if($params){
 		foreach($params as $x => $dat) {
 			foreach($dat as $y => $xVal){

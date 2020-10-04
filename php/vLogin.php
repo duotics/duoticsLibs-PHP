@@ -3,7 +3,7 @@
 //v.0.1 initial code
 //v.0.2 mysqli updated -> 2018-03-02
 function vLogin($mSel=NULL){//v.0.2
-	//,$accesscheck=FALSE){
+	/*,$accesscheck=FALSE){*/
 	Global $conn;
 	if($mSel){
 		$qry=sprintf('SELECT * FROM tbl_menus_items 
@@ -12,7 +12,7 @@ function vLogin($mSel=NULL){//v.0.2
 		WHERE tbl_menu_usuario.usr_id=%s AND tbl_menus_items.men_nombre=%s',
 		SSQL($_SESSION['MM_UserID'],'int'),
 		SSQL($mSel,'text'));
-		$RS=mysqli_query($qry);
+		$RS=mysqli_query($conn,$qry);
 		$dRS=mysqli_fetch_assoc($RS);
 		$tRS=mysqli_num_rows($RS);
 		if($tRS>0) $vVM=TRUE;

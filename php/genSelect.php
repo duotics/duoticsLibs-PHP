@@ -21,15 +21,14 @@
 	v.3.3.1 Added Extra Documentation
 	v.4.0 mysqli implemented
 */
-function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){//v.4.0
+function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){//duotics_lib->v.4.0
 	if($RS){
 	$dRS = mysqli_fetch_assoc($RS);
 	$tRS = mysqli_num_rows($RS);
-		
 	if(!isset($id))$id=$nom;
 	if (!$nom) $nom="select";
 	echo '<select name="'.$nom.'" id="'.$id.'" class="'.$class.'" data-placeholder="'.$placeHolder.'" '.$opt.'>';
-	
+	//Show Ini Value
 	if($showIni==TRUE){
 		echo '<option value="'.$valIni.'"';
 		if (!$sel) {echo "selected=\"selected\"";}
@@ -59,13 +58,11 @@ function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, 
 	}
 	}
 	echo '</select>';
-	
 	mysqli_free_result($RS);
 	}else{
 		echo '<span class="label label-danger">Error genSelect : '.$nom.'</span>';
 	}
 }
-
 ?>
 
 <?php  genSelect('txtProv', detRowGSel('tbl_prov','prov_id','prov_nom','1','1'), $detA['prov_id'], $class='form-control', 'required', 'txtProv', 'Seleccionar Provincia', TRUE,NULL,'Seleccione') ?>

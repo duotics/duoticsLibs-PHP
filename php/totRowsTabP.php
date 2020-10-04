@@ -7,7 +7,7 @@ v.1.1 = 2017-05-20 :: Corregido cadenas de texto con problemas al pasar como par
 v.2.0 -> 2018-03-02 -> mysqli updated
 v.2.1 -> 20191009 : add msqli_free_result
 */
-function totRowsTabP($table,$param=NULL){//duotics_lib:v.2.0
+function totRowsTabP($table,$param=NULL){//duotics_lib:v.2.1
 	Global $conn;
 	$qry = sprintf('SELECT COUNT(*) AS TR FROM %s WHERE 1=1 %s',
 	SSQL($table,''),
