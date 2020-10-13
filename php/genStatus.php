@@ -9,8 +9,9 @@ v.4.1 -> upgrade to boostrap 4.4 : change btn-xs -> to -> btn-sm
 			upgrade to fontawesome
 v.4.2 -> add $lP=null fix bug php 7
 v.4.3 -> upgrade bootstrap 4.5
+v.4.4 -> wrong error php7
 */
-function genStatus($dest,$params,$css=NULL,$icons=NULL){//duotics_lib->v.4.3
+function genStatus($dest,$params,$css=NULL,$icons=NULL){//duotics_lib->v.4.4
 	$lP=null;
 	$firstP=TRUE;
 	foreach($params as $x => $xVal) {
@@ -29,9 +30,9 @@ function genStatus($dest,$params,$css=NULL,$icons=NULL){//duotics_lib->v.4.3
 				}
 			}else{
 				foreach($icons as $y => $yVal){
-					if($xVal==$yVal[id]){
-						$cssST=$yVal[css];
-						$txtST=$yVal[icon];
+					if($xVal==$yVal['id']){
+						$cssST=$yVal['css'];
+						$txtST=$yVal['icon'];
 					}
 				}
 			}
@@ -47,6 +48,7 @@ function genStatus($dest,$params,$css=NULL,$icons=NULL){//duotics_lib->v.4.3
 }
 /*HOW TO USE*/
 $btnStat=genStatus('_fncts.php',array('ids'=>$ids, 'val'=>$dRS['typEst'],'acc'=>md5('STc'),"url"=>$urlc),NULL,NULL);//Without custom icons
+//With array icons
 $icons=array(
 	array("id"=>0,'css'=>'btn btn-success btn-sm',"icon"=>'<i class="fas fa-star"></i>'),
 	array("id"=>1,'css'=>'btn btn-warning btn-sm',"icon"=>'<i class="fas fa-star"></i>'),

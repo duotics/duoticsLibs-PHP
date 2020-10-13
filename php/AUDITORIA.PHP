@@ -2,10 +2,11 @@
 //Detalle completo Auditoria
 //v.1.0
 //v.2.0 mysqli update
-function dataAud($param1,$ord='DESC'){//duotics_lib v.2.0
+//v.2.1 wrong database query left join
+function dataAud($param1,$ord='DESC'){//duotics_lib v.2.1
 	global $conn;
 	$q = sprintf('SELECT * FROM db_auditoria_detalle 
-	LEFT JOIN tbl_usuario ON db_auditoria_detalle.usr_id=db_auditoria_detalle.usr_id 
+	LEFT JOIN tbl_usuario ON db_auditoria_detalle.usr_id=tbl_usuario.usr_id 
 	INNER JOIN db_empleados ON tbl_usuario.emp_cod=db_empleados.emp_cod 
 	WHERE db_auditoria_detalle.id_aud=%s ORDER BY db_auditoria_detalle.id %s LIMIT 1',
 	SSQL($param1,'text'),

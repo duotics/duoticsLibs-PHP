@@ -20,8 +20,13 @@
 	v.3.3 fix bug
 	v.3.3.1 Added Extra Documentation
 	v.4.0 mysqli implemented
+	v.4.1 initialize some vars and add isset controls
 */
-function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){//duotics_lib->v.4.0
+function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, $placeHolder=NULL, $showIni=TRUE, $valIni=NULL, $nomIni="Select"){//duotics_lib->v.4.1
+	$dRS=null;
+	$grpAct=null;
+	$grpSel=null;
+	$banG=false;
 	if($RS){
 	$dRS = mysqli_fetch_assoc($RS);
 	$tRS = mysqli_num_rows($RS);
@@ -37,8 +42,8 @@ function genSelect($nom=NULL, $RS, $sel=NULL, $class=NULL, $opt=NULL, $id=NULL, 
 	
 	if($tRS>0){
 	do {
-		$grpAct=$dRS['sGRUP'];
-		if(($grpSel!=$grpAct)&&($grpAct)){		
+		if(isset($dRS['sGRUP'])) $grpAct=$dRS['sGRUP'];
+		if(($grpSel!=$grpAct)&&(isset($grpAct))){		
 			if($banG==true) echo '</optgroup>'; 
 			echo '<optgroup label="'.$dRS['sGRUP'].'">';
 			$grpSel=$grpAct;
