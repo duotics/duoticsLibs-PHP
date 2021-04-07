@@ -3,14 +3,12 @@
 v.0.1 :: begin create function
 v.0.2 :: add PARAM $cookieIDtoVAL
 v.0.3 :: add CONDITION if $cookieName :: verify if the param $cookieName exists
+v.0.4 :: 20210406 :: in function "setCookieArray" define $LOG 
 */
 //////////////////////////
-/* BEG COOKIES FUNCTION */
-function delCookie($cookieName){//v.0.3
-	unset($_COOKIE[$cookieName]);
-	setcookie($cookieName, "", time() - (86400 * 30),'/', ".mercoframes.com");
-}
-function setCookieArray($cookieName,$cookieID,$cookieVal,$cookieIDtoVAL=TRUE,$limitItems=100,$cookieTime=NULL){//v.0.3
+/* BEG COOKIES FUNCTION v.0.4*/
+function setCookieArray($cookieName,$cookieID,$cookieVal,$cookieIDtoVAL=TRUE,$limitItems=100,$cookieTime=NULL){//v.0.4
+	$LOG=null;
 	$LOG.= $cookieName.' - ';
 	if(($cookieName)&&($cookieID)){
 		if(array_key_exists($cookieName, $_COOKIE)) {
@@ -33,12 +31,17 @@ function setCookieArray($cookieName,$cookieID,$cookieVal,$cookieIDtoVAL=TRUE,$li
 	return $LOG;
 }
 
-function getCookieArray($cookieName,$limitItems=20){//v.0.3
+function getCookieArray($cookieName,$limitItems=20){//v.0.4
+	$cookieFIN=null;
 	if (isset($_COOKIE[$cookieName])){
 		$cookie=unserialize($_COOKIE[$cookieName]);
 		$cookieFIN = array_slice($cookie, 0, $limitItems,true);
 	}
 	return $cookieFIN;
+}
+function delCookie($cookieName){//v.0.4
+	unset($_COOKIE[$cookieName]);
+	setcookie($cookieName, "", time() - (86400 * 30),'/', ".mercoframes.com");
 }
 /* END COOKIES FUNCTION */
 //////////////////////////
