@@ -1,7 +1,7 @@
 <?php
 //GENERACION DE MENUS CON NIVELES Y LENGUAJES
 function genMenu($refMC,$css=NULL,$vrfUL=TRUE){//v.3.0
-	Global $conn;
+	global $conn;
 	//verifico si el menu existe
 	$dMC=detRow('tbl_menus','ref',$refMC);
 	if($dMC){

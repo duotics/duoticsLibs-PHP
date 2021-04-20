@@ -10,9 +10,9 @@ v.0.1 init code
 v.1.1 migrate to mysqli
 v.1.2 20191009 change variable names
 */
-
-function detRowSel($table,$fielID,$field,$param,$other=NULL){//v.1.1
+function detRowSel($table,$fielID,$field,$param,$other=NULL){//v.1.2
 	Global $conn;
+	$list=null;
 	$q = sprintf('SELECT %s as sID FROM %s WHERE %s=%s '.$other,
 	SSQL($fielID,''),
 	SSQL($table,''),
@@ -28,7 +28,6 @@ function detRowSel($table,$fielID,$field,$param,$other=NULL){//v.1.1
 	mysqli_free_result($RS);
 	return ($list);
 }
-
 //HOW TO USER
 detRowSel('tbl_items_type_vs','typID','item_id',$ids)
 ?>

@@ -18,6 +18,7 @@ function vImg($ruta,$nombre,$thumb=TRUE,$pthumb='t_',$retHtml=FALSE){//v1.5
 	$imgRet['n']=$GLOBALS['RAIZi'].'struct/no_image.jpg';
 	$imgRet['t']=$imgRet['n'];
 	$imgRet['s']=FALSE;//Verify if file exist is default FALSE
+	$imgRet['f']=$nombre;
 	if($nombre){
 
 		if (file_exists(RAIZ.$ruta.$nombre)){

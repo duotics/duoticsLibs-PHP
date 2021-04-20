@@ -2,9 +2,11 @@
 /*DELETE FILE FROM SERVER
 v.1.0 -> Receive params and delete File
 v.1.1 -> Option ($vT) delete thumb ($pT = subfix of thumb)
+v.1.2 -> $LOG declare
 */
-function deleteFile($path,$file,$vT=FALSE,$pT='t_'){ //v.1.1
-$fileDel=$path.$file;
+function deleteFile($path,$file,$vT=FALSE,$pT='t_'){ //v.1.2
+	$LOG=null;
+	$fileDel=$path.$file;
 	if (file_exists($fileDel)) {
 		if (unlink($fileDel)) $LOG.='<span>Imagen anterior eliminada</span>';
 		else $LOG.='<span>Error al eliminar imagen anterior</span>';
