@@ -20,12 +20,12 @@ function genStatus($dest,$params,$css=NULL,$icons=NULL){//duotics_lib->v.4.4
 				if($xVal==1){
 					$xVal=0;
 					$cssST='btn btn-success btn-sm';
-					if($icons[1]) $txtST=$icons[1];
+					if(isset($icons[1])) $txtST=$icons[1];
 					else $txtST='<i class="fas fa-check"></i>';
 				}else{
 					$xVal=1;
 					$cssST='btn btn-warning btn-sm';
-					if($icons[1]) $txtST=$icons[1];
+					if(isset($icons[1])) $txtST=$icons[1];
 					else $txtST='<i class="fas fa-times"></i>';
 				}
 			}else{
