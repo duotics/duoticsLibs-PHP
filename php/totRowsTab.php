@@ -10,11 +10,12 @@ v.2.0 = 2018-04-02 :: update to mysqli
 v.2.1 : 20191009 : add mysqli_free_result
 v.2.2 upgrade php7
 v.2.3 20200606 $qryCond=null; fix bug undefined php7
+v.2.4 20210421 add isset in condition
 */
-function totRowsTab($table,$field=NULL,$param=NULL,$cond='='){//duotics_lib->v.2.3
+function totRowsTab($table,$field=NULL,$param=NULL,$cond='='){//duotics_lib->v.2.4
 	Global $conn;
 	$qryCond=null;
-	if(($field)&&($param)){
+	if((isset($field))&&(isset($param))){
 		$qryCond=sprintf(' WHERE %s %s %s',
 						SSQL($field,''),
 						SSQL($cond,''),
