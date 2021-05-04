@@ -7,14 +7,15 @@ v.0.2 add $sel=null default, add condition if $sel
 v.0.3 more options switch case
 v.0.4 add $val=null; fix bug php 7
 v.0.5 20200618 : add spaces after and befre $xval
+v.0.6 20210504 : changes styles comp with bootstrap 5, and ID property mod with name at begin
 */
-function genFormsInpRadio($params,$sel=null,$typ=null,$def=null,$name=null){//duotics_lib -> v.0.5
+function genFormsInpRadio($params,$sel=null,$typ=null,$def=null,$name=null){//duotics_lib -> v.0.6
 	$val=null;
 	$contI=0;
 	foreach($params as $xid => $xval){
 		switch($typ){
 			case 'btn-group':
-				$val.='<label class="btn btn-default btn-sm ';
+				$val.='<label class="btn btn-light btn-sm ';
 				if (!(strcmp($sel, $xid))) $val.=' active ';
 				else if (!(strcmp($def, $xid))) $val.=' active ';
 				$val.='"><input type="radio" name="'.$name.'" value="'.$xid.'"';
@@ -24,11 +25,11 @@ function genFormsInpRadio($params,$sel=null,$typ=null,$def=null,$name=null){//du
 			break;
 			case 'inline':
 				$val.='<div class="form-check form-check-inline">';
-				$val.='<input name="'.$name.'" class="form-check-input" type="radio" id="inlineRadioOptions'.$xid.'" value="'.$xid.'"';
+				$val.='<input name="'.$name.'" class="form-check-input" type="radio" id="'.$name.'-inlineRadioOptions'.$xid.'" value="'.$xid.'"';
 				if (!(strcmp($sel, $xid))) $val.=' checked ';
 				else if (!(strcmp($def, $xid))) $val.=' checked ';
 				$val.='>';
-				$val.='<label class="form-check-label" for="inlineRadioOptions'.$xid.'"> '.$xval.' </label>';
+				$val.='<label class="form-check-label" for="'.$name.'-inlineRadioOptions'.$xid.'"> '.$xval.' </label>';
 				$val.='</div>';
 			break;
 			default:
