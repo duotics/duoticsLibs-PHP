@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<info>
-	<infoitem key="UD_RS_ContactDet" value="name:cont_id;datatype:int,name:cont_name;datatype:string,name:cont_comp;datatype:string,name:cont_mail;datatype:string,name:cont_telf;datatype:string,name:cont_addr;datatype:string,name:c_id;datatype:int,name:stat_id;datatype:int,name:cont_city;datatype:string,name:cont_zip;datatype:string,name:cont_web;datatype:string,name:cont_msg;datatype:string,name:cont_tip;datatype:string,name:cont_stat;datatype:string" />
-</info>

@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<info>
-	<infoitem key="UD_RS_OrderDet" value="name:ord_id;datatype:int,name:basketSession;datatype:string,name:cont_id;datatype:int,name:ord_date;datatype:date,name:ord_status;datatype:string" />
-</info>
