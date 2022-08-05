@@ -7,19 +7,20 @@
                         1=TRUE -> Do not delete session $_SESSION['LOG']
                         0=FALSE -> Default delete session LOG
                         null=FALSE -> Default delete session LOG
-
+20220804 v.0.2 ->	Change asignment way data from $msg or $_SESSION['LOG'] to var $LOG show in alert
+20220804 v.0.3 ->	Toast notification add two variantes, 1) with header, 2)without header - custom css
+						- With Header Toast -> require $_SESSION['LOG']['t']
+						- Without Header Toast (custom style) -> use $_SESSION['LOG']['ct'] -> for style -> value defined in config.ini
 
 */
-function sLOG($type=NULL, $msg=NULL, $persist){//duoticsLib php8 v.0.1
+function sLOG($type=NULL, $msg=NULL, $persist=0){//duoticsLib php8 v.0.3
 	$LOG=NULL;
-	$vrfVL=TRUE; //var para setear $LOG
-    //Verify if LOG data is set from function parameter else LOG data obtain from SESSION LOG
-	if(isset($msg['m'])&&($msg)) $LOG=$msg;
-	else $LOG=$_SESSION['LOG'] ?? null;
-	//BEG IF $LOG -> data exists
+	$vrfVL=TRUE;
+	if(isset($msg)) $LOG=array("m"=>$msg['m'] ?? null, "t"=>$msg['t'] ?? null, "i"=>$msg['i'] ?? null, "l"=>$msg['l'] ?? null, "c"=>$msg['c'] ?? null);
+	else if(isset($_SESSION['LOG'])) $LOG=array("m"=>$_SESSION['LOG']['m'], "t"=>$_SESSION['LOG']['t'] ?? null, "i"=>$_SESSION['LOG']['i'] ?? null, "l"=>$_SESSION['LOG']['l'] ?? null, "c"=>$_SESSION['LOG']['c'] ?? null);
 	if($LOG){
 		if(!$LOG['c']) $LOG['c']='alert-info';
-        $rLog=null;
+		$rLog=null;
 		switch ($type){
 			case 'a':
 				$rLog='<div id="log">';
@@ -33,20 +34,19 @@ function sLOG($type=NULL, $msg=NULL, $persist){//duoticsLib php8 v.0.1
 				$vrfVL=FALSE;
 			break;
 			case 't':
-				//echo 'case t<br>';
-				$rLog='<div class="toast" style="position: absolute; bottom: 25px; right: 25px; z-index: 999" data-delay="3000">
-				<div class="toast-header">
-				  <img src="'.$LOG['i'].'" class="img-fluid img-xs rounded mr-2" alt="...">
-				  <strong class="mr-auto">'.$LOG['t'].'</strong>
-				  <!--<small>11 mins ago</small>-->
-				  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				  </button>
-				</div>
-				<div class="toast-body">
-				  '.$LOG['m'].'
-				</div>
-			  </div>';
+				$rLog="<div class='toast-container p-3 bottom-0 end-0' id='toastPlacement'>
+					<div class='toast fade show $LOG[c]' data-bs-delay='3000'>";
+				if(isset($LOG['t'])){
+				$rLog.="<div class='toast-header'>
+						<img src='$LOG[i]' class='img-fluid img-xxs me-2' alt=''>
+						<strong class='me-auto'>$LOG[t]</strong>
+						<small>$LOG[l]</small>
+						<button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>
+						</div>";
+				}
+				$rLog.="<div class='toast-body'>$LOG[m]</div>
+					</div>
+			  	</div>";
 			break;
 			default:
 				$rLog='<div>'.$LOG['m'].'</div>';
@@ -54,14 +54,12 @@ function sLOG($type=NULL, $msg=NULL, $persist){//duoticsLib php8 v.0.1
 		}
 		echo $rLog;
 	}
-    //END IF DATA EXISTS
-	if(($vrfVL)&&(!($persist))){//TRUE unset->LOG, FALSE $_SESSION LOG -> $LOG
-		unset($_SESSION['LOG']);
-	}else{
-		$_SESSION['LOG']=$LOG;
-	}
+    if(($vrfVL)&&(!($persist))) unset($_SESSION['LOG']);
+	else $_SESSION['LOG']=$LOG;
 }
-/*HOW TO USE*/
+/*
+HOW TO USE
+*/
 sLOG('a');//Show LOG in div.alert alert-
 sLOG('t');//Show LOG in toast bs plugin
 sLOG('');//Show LOG in div
