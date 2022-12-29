@@ -11,60 +11,75 @@
 20220804 v.0.3 ->	Toast notification add two variantes, 1) with header, 2)without header - custom css
 						- With Header Toast -> require $_SESSION['LOG']['t']
 						- Without Header Toast (custom style) -> use $_SESSION['LOG']['ct'] -> for style -> value defined in config.ini
+20221109 v.0.4 ->	Add SweetAlert Notification in case, params and function javascript
 
 */
-function sLOG($type=NULL, $msg=NULL, $persist=0){//duoticsLib php8 v.0.3
-	$LOG=NULL;
-	$vrfVL=TRUE;
-	if(isset($msg)) $LOG=array("m"=>$msg['m'] ?? null, "t"=>$msg['t'] ?? null, "i"=>$msg['i'] ?? null, "l"=>$msg['l'] ?? null, "c"=>$msg['c'] ?? null);
-	else if(isset($_SESSION['LOG'])) $LOG=array("m"=>$_SESSION['LOG']['m'], "t"=>$_SESSION['LOG']['t'] ?? null, "i"=>$_SESSION['LOG']['i'] ?? null, "l"=>$_SESSION['LOG']['l'] ?? null, "c"=>$_SESSION['LOG']['c'] ?? null);
-	if($LOG){
-		if(!$LOG['c']) $LOG['c']='alert-info';
-		$rLog=null;
-		switch ($type){
-			case 'a':
-				$rLog='<div id="log">';
-				$rLog.='<div class="alert alert-dismissable '.$LOG['c'].'" style="margin:10px;">';
-				$rLog.='<button type="button" class="close" data-dismiss="alert">&times;</button>';
-				if($LOG['t']) $rLog.='<h3>'.$LOG['t'].'</h3>';
-				$rLog.=$LOG['m'];
-				$rLog.='</div></div>';
-			break;
+function sLOG($type = NULL, $msg = NULL, $persist = 0)//duoticsLib php8 v.0.4
+{
+	$LOG = NULL;
+	$vrfVL = TRUE;
+	if (isset($msg)) $LOG = array("m" => $msg['m'] ?? null, "t" => $msg['t'] ?? null, "i" => $msg['i'] ?? null, "l" => $msg['l'] ?? null, "c" => $msg['c'] ?? null);
+	else if (isset($_SESSION['LOG'])) $LOG = array("m" => $_SESSION['LOG']['m'], "t" => $_SESSION['LOG']['t'] ?? null, "i" => $_SESSION['LOG']['i'] ?? null, "l" => $_SESSION['LOG']['l'] ?? null, "c" => $_SESSION['LOG']['c'] ?? null);
+	if ($LOG) {
+		if (!$LOG['c']) $LOG['c'] = 'alert-info';
+		$rLog = null;
+		switch ($type) {
 			case 's':
-				$vrfVL=FALSE;
-			break;
+				$vrfVL = FALSE;
+				break;
+			case 'a':
+				$rLog = '<div id="log">';
+				$rLog .= '<div class="alert alert-dismissable ' . $LOG['c'] . '" style="margin:10px;">';
+				$rLog .= '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+				if ($LOG['t']) $rLog .= '<h3>' . $LOG['t'] . '</h3>';
+				$rLog .= $LOG['m'];
+				$rLog .= '</div></div>';
+				break;
 			case 't':
-				$rLog="<div class='toast-container p-3 bottom-0 end-0' id='toastPlacement'>
+				$rLog = "<div class='toast-container p-3 bottom-0 end-0' id='toastPlacement'>
 					<div class='toast fade show $LOG[c]' data-bs-delay='3000'>";
-				if(isset($LOG['t'])){
-				$rLog.="<div class='toast-header'>
+				if (isset($LOG['t'])) {
+					$rLog .= "<div class='toast-header'>
 						<img src='$LOG[i]' class='img-fluid img-xxs me-2' alt=''>
 						<strong class='me-auto'>$LOG[t]</strong>
 						<small>$LOG[l]</small>
 						<button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>
 						</div>";
 				}
-				$rLog.="<div class='toast-body'>$LOG[m]</div>
-					</div>
-			  	</div>";
-			break;
+				$rLog .= "<div class='toast-body'>$LOG[m]</div>
+					</div></div>";
+				break;
+			case 'sw':
+				$rLog = "<script type='text/javascript'>
+                    logSweetAlert('{$LOG['t']}', '{$LOG['m']}', '{$LOG['i']}');
+					function logSweetAlert(title=null, text=null, icon='success', showConfirmButton=false, timer=1500, position='bottom-end') {
+						Swal.fire({
+						  position: position,
+						  icon: icon,
+						  title: title,
+						  text: text,
+						  showConfirmButton: showConfirmButton,
+						  timer: timer,
+						});
+					  }
+                    </script>";
+				break;
 			default:
-				$rLog='<div>'.$LOG['m'].'</div>';
-			break;
+				$rLog = '<div>' . $LOG['m'] . '</div>';
+				break;
 		}
 		echo $rLog;
 	}
-    if(($vrfVL)&&(!($persist))) unset($_SESSION['LOG']);
-	else $_SESSION['LOG']=$LOG;
+	if (($vrfVL) && (!($persist))) unset($_SESSION['LOG']);
+	else $_SESSION['LOG'] = $LOG;
 }
 /*
 HOW TO USE
 */
-sLOG('a');//Show LOG in div.alert alert-
-sLOG('t');//Show LOG in toast bs plugin
-sLOG('');//Show LOG in div
-sLOG('s');//SET $_SESSION LOG
+sLOG('a'); //Show LOG in div.alert alert-
+sLOG('t'); //Show LOG in toast bs plugin
+sLOG('sw'); //Show LOG in sweetalert bs plugin
+sLOG(''); //Show LOG in div
+sLOG('s'); //SET $_SESSION LOG
 
-sLOG('t',null,1);//third parameter determine if SESSION LOG is unset -> 0 or null=unset session ; 1=persist SESSION LOG
-
-?>
+sLOG('t', null, 1);//third parameter determine if SESSION LOG is unset -> 0 or null=unset session ; 1=persist SESSION LOG
